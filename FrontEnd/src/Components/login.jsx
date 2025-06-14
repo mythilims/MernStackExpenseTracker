@@ -47,8 +47,8 @@ function Login() {
   };
   return (
     <>
-      <div className="container">
-        {isLogin === "REGISTER" ? (
+     <div className="container">
+       {isLogin === "REGISTER" ? (
           <>
             <form className="formDiv" onSubmit={(e) => login(e)}>
               <h1>Create Account </h1>
@@ -144,8 +144,8 @@ function Login() {
               </span>
             </form>
           </>
-        )}
-      </div>
+        )} 
+        </div>
     </>
   );
 }
