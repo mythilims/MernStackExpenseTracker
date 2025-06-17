@@ -2,7 +2,7 @@ const jswebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../Models/User.model");
 
-const logniController = async (req, res) => {
+const logniController = async (req, res) => {  
   const { email, password } = req.body;
   let existsUser = await User.findOne({ email }).select(
     "username email password _id"
@@ -27,7 +27,7 @@ const logniController = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, username, password } = req.body;  
   const isExistUser = await User.findOne({ email }).select(
     "username email -_id"
   );  // exclude  -_id  {userName,email }

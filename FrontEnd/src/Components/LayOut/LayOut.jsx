@@ -1,11 +1,10 @@
 import { Outlet } from "react-router-dom";
 import ExpenseHeader from "../Header/ExpenseHeader";
 import ExpenseSidebar from "../Sidebar/ExpenseSidebar";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
 function LayOut() {
   return (
     <>
+    
       <div
         style={{ display: "flex", flexDirection: "column", height: "100vh" }}
       >

@@ -8,38 +8,44 @@ import {
   Grid,
   TextField,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import AuthContext from '../Context/AuthContext';
+import { useContext } from "react";
 
 function AddExpenseTracker() {
+    const {token,userDetails} =useContext(AuthContext)
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    isSubmitting,
+    formState: { errors ,isSubmitting},
     reset,
   } = useForm();
   const onSubmit = async (formata) => {
     console.log("tedt");
-
-    formata.userI = "";
+    formata.userI = (userDetails.id);
     try {
       let data = await fetch("http://127.0.0.1:8080/expense/create", {
         method: "POST",
-        header: {
-          "Content-Type": "application/json",
+        headers: {
+          "content-type": "application/json",
+           'Authorization':`Bearer ${token}`
         },
         body: JSON.stringify(formata),
       });
-      let result = await data.json();
-      if (!result.ok) {
-        toast.error(result.message);
-        return;
-      }
+      // let result = await data.json();
+      // if (!result.ok) {
+      //   toast.error(result.message);
+      //   return;
+      // }
       toast.success("Expense Created success");
+      
     } catch (e) {
       toast.error(e.message);
+    }finally{
+      reset()
     }
   };
   return (
@@ -150,7 +156,7 @@ function AddExpenseTracker() {
               type="submit"
               disabled={isSubmitting}
             >
-              Save
+              {isSubmitting ? <CircularProgress/>:'Save'}
             </Button>
             <Button variant="contained" color="error" onClick={() => reset()}>
               Reset

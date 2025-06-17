@@ -4,7 +4,7 @@ const { expensebyCateogry,createExpenseTracker, getAllExpenseTracker, updateExpe
 const authMiddleWare = require('../../Middleware/AuthMiddleware');
 const route =express.Router();
 
-// route.use(authMiddleWare);
+route.use(authMiddleWare);
 // route.use();
 
 //create a expense

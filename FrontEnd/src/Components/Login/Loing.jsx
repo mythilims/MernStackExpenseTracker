@@ -1,16 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import {  Button, CircularProgress, Stack, TextField, Typography } from "@mui/material";
+// import { useState } from "react";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-
+import AuthContext from "../Context/AuthContext";
+import { useContext } from "react";
 function Login() {
+    const {login} =useContext(AuthContext)
+
   const navigate =useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors ,isSubmitted},
   } = useForm();
   // const [userDetails, setUserDetails] = useState({ email: "", password: "" });
   const onSubmit = async (fromData) => {
@@ -23,20 +26,26 @@ function Login() {
       email,
       password,
     };
-          navigate('/ExpenseDashboard');
 
     try {
       const data = await fetch("http://127.0.0.1:8080/login", {
         method: "POST",
-        header: {},
+        headers: {
+          'content-type':'application/json'
+        },
         body: JSON.stringify(details),
       });
       const result = await data.json();
-      if (!result.ok) {
+      if (!result.passWrdVerify) {
         toast.error(result.message);
         return;
       }
+       localStorage.setItem('token',result.token);
+       let detail =JSON.stringify({name:result.userDetails.username,email:result.userDetails.email,id:result.userDetails._id});
+      localStorage.setItem('userDetails',detail);
       toast.success(result.message);
+      login(result.token,detail);
+      navigate('/ExpenseDashboard');
     } catch (e) {
       console.log("❌ Fetch Error:", e.message);
       toast.warn(e.message);
@@ -106,8 +115,9 @@ function Login() {
           size="small"
           sx={{ py: 1 }}
           fullWidth
+          disabled={isSubmitted}
         >
-          Login
+          {isSubmitted ? <CircularProgress/> : 'Login'}
         </Button>
         <Stack
           display={"flex"}

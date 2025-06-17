@@ -120,7 +120,7 @@
 
 // export default ExpenseTrackerList;
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext} from "react";
 import {
   Typography,
   Box,
@@ -132,9 +132,10 @@ import {
   Stack,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import AuthContext from '../Context/AuthContext';
 import TableComponent from "../Table/Table";
-
 function ExpenseTrackerList() {
+  const {token} =useContext(AuthContext)
   const [dataDetails, setDataDetails] = useState({
     data: [],
     column: [],
@@ -144,7 +145,12 @@ function ExpenseTrackerList() {
   useEffect(() => {
     async function getExpenseList() {
       try {
-        const data = await fetch("http://127.0.0.1:8080/expense/all");
+        const data = await fetch("http://127.0.0.1:8080/expense/all",{
+          headers:{
+            'content-type':'application/json',
+            'Authorization':`Bearer ${token}`
+          }
+        });
         const result = await data.json();
 
         if (result.length > 0) {
@@ -171,7 +177,7 @@ function ExpenseTrackerList() {
     }
 
     getExpenseList();
-  }, []);
+  }, [token]);
 
   return (
     <Box

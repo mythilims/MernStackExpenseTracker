@@ -25,6 +25,7 @@ function Signup () {
                 return;
             }
             toast("Signup successfuly")
+           
         }catch(e){
         toast.error(e.message)
         }finally{
