@@ -7,15 +7,24 @@ const createExpenseTracker = async (req, res) => {
     res.status(200).json(expenseTracker);
   } catch (e) {
     res.status(500).json({ message: e.message });
+
   }
 };
 
 const getAllExpenseTracker = async (req, res) => {
+   let page =parseInt(req.params.page) || 1;
+   let limit =parseInt(req.params.limit) || 10;
+   console.log(page,limit);
+   let skip =(page-1) *limit;
+   console.log(skip);
+   let total =await ExpenseTracker.countDocuments();
   try {
-    const expense = await ExpenseTracker.find({}).select('name amount category date notes paymentMethod id');
-    res.status(200).json(expense);
+    const expense = await ExpenseTracker.find().skip(skip).limit(limit).select('name amount category date notes paymentMethod id');
+    res.status(200).json({data:expense,currentPage:page,totalPages:Math.ceil(total/limit),totalItems:total});
   } catch (e) {
     res.status(500).json({ message: e.message });
+    throw new Error(e);
+    
   }
 };
 

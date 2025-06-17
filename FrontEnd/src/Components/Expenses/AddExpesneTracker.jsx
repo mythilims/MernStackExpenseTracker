@@ -12,42 +12,71 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import AuthContext from '../Context/AuthContext';
+import AuthContext from "../Context/AuthContext";
 import { useContext } from "react";
+import { useParams,useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function AddExpenseTracker() {
-    const {token,userDetails} =useContext(AuthContext)
+  const { id } = useParams();
+  const navigate =useNavigate();
+  const { token, userDetails } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
-    formState: { errors ,isSubmitting},
+    formState: { errors, isSubmitting },
     reset,
   } = useForm();
   const onSubmit = async (formata) => {
     console.log("tedt");
-    formata.userI = (userDetails.id);
+    formata.userI = userDetails.id;
     try {
-      let data = await fetch("http://127.0.0.1:8080/expense/create", {
-        method: "POST",
+      let url = id ?`http://127.0.0.1:8080/expense/update/${id}` :"http://127.0.0.1:8080/expense/create"
+      let data = await fetch(url, {
+        method: id? "PUT":"POST",
         headers: {
           "content-type": "application/json",
-           'Authorization':`Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formata),
       });
-      // let result = await data.json();
-      // if (!result.ok) {
-      //   toast.error(result.message);
-      //   return;
-      // }
-      toast.success("Expense Created success");
-      
+      let result = await data.json();
+      if (!data.ok) {
+        toast.error(result.message);
+        return;
+      }
+      toast.success(id ? `Expense Updated success`:`Expense Created success`);
+      if(id){
+        navigate('/expenselist')
+      }
     } catch (e) {
       toast.error(e.message);
-    }finally{
-      reset()
+    } finally {
+      reset();
     }
   };
+  useEffect(() => {
+    async function getById() {
+      try {
+        const data = await fetch(`http://127.0.0.1:8080/expense/${id}`, {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const result = await data.json();
+        if (!data.ok) {
+          toast.error(result.message);
+          return;
+        }
+        reset(result);
+      } catch (e) {
+        toast.error(e.message);
+      }
+    }
+    getById();
+  }, [id, reset, token]);
   return (
     <Stack
       sx={{
@@ -78,9 +107,13 @@ function AddExpenseTracker() {
                 <TextField
                   label="Name"
                   size="small"
+                  sx={{ shrink: true }}
                   fullWidth
                   {...register("name", { required: "Name is Required" })}
                   error={!!errors.name}
+                  slotProps={{
+                    inputLabel: { shrink: true },
+                  }}
                   helperText={errors.name?.message}
                 />
               </Grid>
@@ -92,6 +125,9 @@ function AddExpenseTracker() {
                   {...register("amount", { required: "Amount is Required" })}
                   error={!!errors.amount}
                   helperText={errors.amount?.message}
+                  slotProps={{
+                    inputLabel: { shrink: true },
+                  }}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -102,6 +138,9 @@ function AddExpenseTracker() {
                   {...register("category", {
                     required: "Category is Required",
                   })}
+                  slotProps={{
+                    inputLabel: { shrink: true },
+                  }}
                   error={!!errors.category}
                   helperText={errors.category?.message}
                 />
@@ -113,7 +152,8 @@ function AddExpenseTracker() {
                   type="date"
                   size="small"
                   fullWidth
-                  InputLabelProps={{ shrink: true }} // ✅ Correct prop
+                  slotProps={{ inputLabel: { shrink: true } }}
+                  // InputLabelProps={{ shrink: true }} // ✅ Correct prop
                   {...register("date", { required: "Date is Required" })}
                   error={!!errors.date}
                   helperText={errors.date?.message}
@@ -123,6 +163,9 @@ function AddExpenseTracker() {
                 <TextField
                   label="Notes"
                   size="small"
+                  slotProps={{
+                    inputLabel: { shrink: true },
+                  }}
                   fullWidth
                   {...register("notes")}
                 />
@@ -132,6 +175,9 @@ function AddExpenseTracker() {
                   label="Payment Mode"
                   size="small"
                   fullWidth
+                  slotProps={{
+                    inputLabel: { shrink: true },
+                  }}
                   {...register("paymentMethod", {
                     required: "Name is Payment Mode",
                   })}
@@ -156,7 +202,7 @@ function AddExpenseTracker() {
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? <CircularProgress/>:'Save'}
+              {isSubmitting ? <CircularProgress /> : id ? "Update" : "Save"}
             </Button>
             <Button variant="contained" color="error" onClick={() => reset()}>
               Reset

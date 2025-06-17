@@ -41,6 +41,8 @@ function App() {
               <Route path="expensedashboard" element={<ExpenseDashboard />} />
               <Route path="expenselist" element={<ExpenseTrackerList />} />
               <Route path="addexpense" element={<AddExpenseTracker />} />
+
+              <Route path="addexpense/:id" element={<AddExpenseTracker />} />
             </Route>
           </Routes>
         </BrowserRouter>

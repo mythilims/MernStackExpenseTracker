@@ -2,7 +2,10 @@ import { AppBar, Avatar, IconButton, Menu, MenuItem, Stack, Toolbar, Typography
     // Menu,MenuItem
  } from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useContext } from "react";
+import AuthContext from '../Context/AuthContext'
 function ExpenseHeader () {
+    const {userDetails} =useContext(AuthContext)
     return (
         <>
        <AppBar>
@@ -11,15 +14,15 @@ function ExpenseHeader () {
                 Expense Tracker
             </Typography>
             <Stack sx={{display:'flex',flexDirection:'row', justifyContent:'space-between',alignItems:'center',gap:2}}>
-               <Avatar>M</Avatar>
+               <Avatar>{userDetails?.name?.toUpperCase().charAt(0)}</Avatar>
                 <Typography>
-                Mythili
+                {userDetails?.name?.toUpperCase()}
             </Typography>
             <IconButton >
                 <ArrowDropDownIcon />
             </IconButton>
            <Menu>
-            <MenuItem>Logout</MenuItem>
+            <MenuItem >Logout</MenuItem>
            </Menu>
             </Stack>
             

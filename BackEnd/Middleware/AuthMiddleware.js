@@ -15,12 +15,15 @@ const authMiddleWare = (req, res, next) => {
     next();
   } catch (err) {
     if (err.name === "TokenExpiredError") {
-      return res
-        .status(401)
-        .json({
-          message: "Token has expired. Please log in again.",
-          token: "",
-        });
+      // return res
+      //   .status(401)
+      //   .json({
+      //     message: "Token has expired. Please log in again.",
+      //     token: "",
+      //   });  
+      const error = new Error("Token has expired. Please log in again.");
+    error.statusCode = 401;
+    return next(error);
     }
     return res
       .status(403)

@@ -134,6 +134,7 @@ import {
 import { Link } from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
 import TableComponent from "../Table/Table";
+import { toast } from "react-toastify";
 function ExpenseTrackerList() {
   const {token} =useContext(AuthContext)
   const [dataDetails, setDataDetails] = useState({
@@ -152,8 +153,10 @@ function ExpenseTrackerList() {
           }
         });
         const result = await data.json();
-
-        if (result.length > 0) {
+          if(!data.ok){
+            toast.error(result.message)
+          }
+        if (result.data.length > 0) {
           const columns = [
             "sno",
             "name",
@@ -163,10 +166,10 @@ function ExpenseTrackerList() {
             "paymentMethod",
             "notes",
           ];
-          result.forEach((item, key) => {
+          result.data.forEach((item, key) => {
             item["sno"] = key + 1;
           });
-          setDataDetails({ data: result, column: columns, isLoading: false });
+          setDataDetails({ data: result.data, column: columns, isLoading: false });
         } else {
           setDataDetails({ data: [], column: [], isLoading: false });
         }
