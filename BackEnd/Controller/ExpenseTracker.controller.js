@@ -1,7 +1,7 @@
 const ExpenseTracker = require("../Models/ExpenseTracker.model");
 
 const createExpenseTracker = async (req, res) => {
-  const expenseTracker = new ExpenseTracker({ name: req.body.name });
+  const expenseTracker = new ExpenseTracker( req.body );
   try {
     await expenseTracker.save();
     res.json(expenseTracker);
@@ -12,8 +12,8 @@ const createExpenseTracker = async (req, res) => {
 
 const getAllExpenseTracker = async (req, res) => {
   try {
-    const state = await ExpenseTracker.find({});
-    res.json(state);
+    const expense = await ExpenseTracker.find({}).select('name amount category date notes paymentMethod id');
+    res.json(expense);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
@@ -21,12 +21,12 @@ const getAllExpenseTracker = async (req, res) => {
 
 const updateExpenseTracker = async (req, res) => {
   try {
-    const state = await ExpenseTracker.findByIdAndUpdate(
+    const expense = await ExpenseTracker.findByIdAndUpdate(
       req.params.id,
-      { name: req.body.name },
+       req.body ,
       { new: true }
     );
-    res.json(state);
+    res.json(expense);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
@@ -34,8 +34,8 @@ const updateExpenseTracker = async (req, res) => {
 
 const getByIdExpenseTracker = async (req, res) => {
   try {
-    const state = await ExpenseTracker.findById(req.params.id);
-    res.json(state);
+    const expense = await ExpenseTracker.findById(req.params.id);
+    res.json(expense);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
@@ -43,13 +43,33 @@ const getByIdExpenseTracker = async (req, res) => {
 
 const deleteExpenseTracker = async (req, res) => {
   try {
-    const state = await ExpenseTracker.findByIdAndDelete(req.params.id);
-    res.json(state);
+    const expense = await ExpenseTracker.findByIdAndDelete(req.params.id);
+    res.json(expense);
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+};
+const expensebyCateogry = async (req, res) => {
+  try {
+    const expense = await ExpenseTracker.aggregate([{
+      $group:{
+        _id:'$category',
+        totalAmount:{'$sum':'$amount'}
+      }
+    },{
+      $project:{
+        _id:0,
+        category:'$_id',
+        totalAmount:1
+      }
+    }]);
+    res.json(expense);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
 };
 module.exports = {
+  expensebyCateogry,
   createExpenseTracker,
   getAllExpenseTracker,
   updateExpenseTracker,

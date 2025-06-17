@@ -6,12 +6,12 @@
     height: 100vh;
   
 }   
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background: linear-gradient(to right,#FAF0E6, #F0F0F0)
-}
+} */
 .formDiv{
     width: 350px;
     height: 450px;

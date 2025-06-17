@@ -15,6 +15,7 @@ dbConnection();
 
 app.use('/',authLogin);
 app.use('/expense',expenseTracker);
+
 app.set('views', './Views');
 app.set('view engine' ,'pug');  
 app.get('/',(req,res,next)=>{    

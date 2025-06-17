@@ -16,7 +16,7 @@ const logniController = async (req, res) => {
     return;
   }
   let token = jswebtoken.sign({ id: existsUser._id }, "mysecretkey", {
-    expiresIn: "2m",
+    expiresIn: "1h",
   });
   res.json({
     message: "login sucessful",

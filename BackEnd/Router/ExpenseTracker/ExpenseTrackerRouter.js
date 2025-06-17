@@ -1,13 +1,15 @@
 const express =require('express');
 
-const { createExpenseTracker, getAllExpenseTracker, updateExpenseTracker, getByIdExpenseTracker, deleteExpenseTracker } = require('../../Controller/ExpenseTracker.controller');
+const { expensebyCateogry,createExpenseTracker, getAllExpenseTracker, updateExpenseTracker, getByIdExpenseTracker, deleteExpenseTracker } = require('../../Controller/ExpenseTracker.controller');
 const authMiddleWare = require('../../Middleware/AuthMiddleware');
 const route =express.Router();
 
-route.use(authMiddleWare);
+// route.use(authMiddleWare);
+// route.use();
 
-//create a state
+//create a expense
 route.post('/create',createExpenseTracker)
+route.get('/byCateogry',expensebyCateogry)
 
 // get data
 route.get('/all',getAllExpenseTracker)

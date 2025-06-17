@@ -1,8 +1,12 @@
 import { useState } from "react";
 import "./login.css";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const navigate = useNavigate();
+
+    
   const [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
@@ -36,6 +40,7 @@ function Login() {
         return;
       }
       toast.success("Login Successful");
+      navigate('/dashboard/expense-list')
     } catch (e) {
       console.log(e.message);
       // localStorage.removeItem();
