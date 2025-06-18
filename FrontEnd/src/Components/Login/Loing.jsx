@@ -78,9 +78,9 @@ function Login() {
         justifyContent="center"
         alignItems="center"
         height="100vh"
-        sx={{
-          background: "linear-gradient(135deg, #f5f7fa, #c3cfe2)",
-        }}
+        // sx={{
+        //   background: "linear-gradient(135deg, #f5f7fa, #c3cfe2)",
+        // }}
       >
         <Stack
           spacing={2}
@@ -126,10 +126,10 @@ function Login() {
             //   setUserDetails({ ...userDetails, password: e.target.value })
             // }
           />
-          <Stack display="flex" direction="row" justifyContent="space-between">
+          {/* <Stack display="flex" direction="row" justifyContent="space-between">
             <Typography>Remember me</Typography>
             <Typography>Forget Password</Typography>
-          </Stack>
+          </Stack> */}
           <Button
             type="submit"
             variant="contained"

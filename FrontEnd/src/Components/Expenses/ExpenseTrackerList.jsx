@@ -150,7 +150,7 @@ function ExpenseTrackerList() {
   useEffect(() => {
     async function getExpenseList() {
       try {
-        const data = await fetch(`${API_URL}/all?page=7&limit=100`,{
+        const data = await fetch(`${API_URL}/expense/all?page=7&limit=100`,{
           headers:{
             'content-type':'application/json',
             'Authorization':`Bearer ${token}`
@@ -169,7 +169,6 @@ function ExpenseTrackerList() {
             "date",
             "paymentMethod",
             "notes",
-            "Action",
           ];
           result.data.forEach((item, key) => {
             item["sno"] = key + 1;

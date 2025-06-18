@@ -63,13 +63,13 @@ const expensebyCateogry = async (req, res) => {
     const expense = await ExpenseTracker.aggregate([{
       $group:{
         _id:'$category',
-        totalAmount:{'$sum':'$amount'}
+        value:{'$sum':'$amount'}
       }
     },{
       $project:{
         _id:0,
-        category:'$_id',
-        totalAmount:1
+        label:'$_id',
+        value:1
       }
     }]);
     res.status(200).json(expense);

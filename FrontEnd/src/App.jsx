@@ -17,7 +17,7 @@ function App() {
     console.log("5");
 
   return (
-    <div className="">
+    <div className="App">
       <AuthProvider>
         <BrowserRouter>
           <Routes>
