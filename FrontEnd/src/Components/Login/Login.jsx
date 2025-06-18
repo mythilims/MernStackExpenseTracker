@@ -67,34 +67,37 @@ function Login() {
   };
   return (
     <>
-      <Grid container rowSpacing={2} columnSpacing={{ xs: 0, sm: 0, md: 0 }}  sx={{ height: '100vh' }}>
+      <Grid
+        container
+        rowSpacing={2}
+        columnSpacing={{ xs: 0, sm: 0, md: 0 }}
+        sx={{ height: "100vh" }}
+      >
         <Grid
           size={6}
           sx={{
             backgroundImage: `url(${bg})`,
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center center'
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
           }}
         >
-          <Stack
-  justifyContent="center" alignItems="center" p={2}
->
-  <Typography
-      variant="h6"
-      fontStyle="italic"
-      color="white"
-      fontWeight={500}
-      sx={{
-        backgroundColor: 'rgba(0,0,0,0.4)',
-        padding: 2,
-        borderRadius: 2,
-        mt:10
-      }}
-    >
-  “Small expenses, big impact. Stay in control.”
-</Typography>
-</Stack>
+          <Stack justifyContent="center" alignItems="center" p={2}>
+            <Typography
+              variant="h6"
+              fontStyle="italic"
+              color="white"
+              fontWeight={500}
+              sx={{
+                backgroundColor: "rgba(0,0,0,0.4)",
+                padding: 2,
+                borderRadius: 2,
+                mt: 10,
+              }}
+            >
+              “Small expenses, big impact. Stay in control.”
+            </Typography>
+          </Stack>
         </Grid>
         <Grid size={6}>
           <Stack
@@ -122,16 +125,14 @@ function Login() {
               component="form"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <Typography variant="h5" >
-                Welcome
-              </Typography>
+              <Typography variant="h5">Welcome</Typography>
               <TextField
                 label="Email"
                 size="small"
                 type="text"
                 // value={userDetails.email}
                 // fullWidth
-                sx={{width:'50%'}}
+                sx={{ width: "50%" }}
                 {...register("email", { required: "Email is required" })}
                 helperText={errors?.email?.message}
                 error={!!errors.email}
@@ -144,7 +145,7 @@ function Login() {
                 label="Password"
                 type="password"
                 size="small"
-                 sx={{width:'50%'}}
+                sx={{ width: "50%" }}
                 // fullWidth
                 {...register("password", { required: "Password is required" })}
                 error={!!errors.password}
@@ -163,15 +164,17 @@ function Login() {
                 type="submit"
                 variant="contained"
                 size="small"
-                sx={{ py: 1 ,width:'50%',
-                        background: 'black',
+                sx={{
+                  py: 1,
+                  width: "50%",
+                  background: "black",
 
                   //  background: 'linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.2))'
-                  }}
+                }}
                 fullWidth
                 disabled={isSubmitting}
               >
-                {isSubmitting  ? (
+                {isSubmitting ? (
                   <Stack direction={"row"} alignItems={"center"} spacing={2}>
                     <CircularProgress variant="indeterminate" value={60} />{" "}
                     Logging in...
@@ -180,11 +183,7 @@ function Login() {
                   "Login"
                 )}
               </Button>
-              <Stack
-                display={"flex"}
-                direction={"row"}
-                spacing={12}
-              >
+              <Stack display={"flex"} direction={"row"} spacing={12}>
                 <Typography>No account </Typography>
                 <Typography
                   component={Link}
