@@ -1,13 +1,13 @@
 import "./App.css";
-import { ToastContainer } from "react-toastify";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import Login from "./Components/Login/Loing";
 import ExpenseTrackerList from "./Components/Expenses/ExpenseTrackerList";
 import AddExpenseTracker from "./Components/Expenses/AddExpesneTracker";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./Components/Login/Signup";
 import LayOut from "./Components/LayOut/LayOut";
-import ExpenseDashboard from "./Components/DashBoard/ExpenseDashboard";
+import Dashboard from "./Components/DashBoard/ExpenseDashboard";
 import AuthProvider from "./Components/Context/AuthProvider";
 function App() {
     console.log("5");
@@ -36,7 +36,7 @@ function App() {
             ></Route>
 
             <Route path="/" element={<LayOut />}>
-              <Route path="expensedashboard" element={<ExpenseDashboard />} />
+              <Route path="expensedashboard" element={<Dashboard />} />
               <Route path="expenselist" element={<ExpenseTrackerList />} />
               <Route path="addexpense" element={<AddExpenseTracker />} />
 
