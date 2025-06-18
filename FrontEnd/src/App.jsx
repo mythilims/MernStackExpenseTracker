@@ -14,6 +14,8 @@ import LayOut from "./Components/LayOut/LayOut";
 import ExpenseDashboard from "./Components/DashBoard/ExpenseDashboard";
 import AuthProvider from "./Components/Context/AuthProvider";
 function App() {
+    console.log("5");
+
   return (
     <div className="">
       <AuthProvider>

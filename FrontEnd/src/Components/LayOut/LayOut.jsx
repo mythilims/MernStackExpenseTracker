@@ -2,6 +2,8 @@ import { Outlet } from "react-router-dom";
 import ExpenseHeader from "../Header/ExpenseHeader";
 import ExpenseSidebar from "../Sidebar/ExpenseSidebar";
 function LayOut() {
+  console.log("1");
+  
   return (
     <>
     

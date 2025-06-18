@@ -6,10 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    {/* <BrowserRouter>  */}
-    <App />
-    {/* </BrowserRouter> */}
-   <ToastContainer/>
-  </StrictMode>,
+   <>
+     <App />
+        <ToastContainer/>
+
+    </>
+  // <StrictMode>
+    /* <BrowserRouter>  */
+   
+   
+    /* </BrowserRouter> */
+  // </StrictMode>,
 )

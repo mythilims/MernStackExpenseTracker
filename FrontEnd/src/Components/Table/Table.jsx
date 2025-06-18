@@ -68,6 +68,8 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 function TableComponent({ list }) {
+    console.log("4");
+
   return (
     <>
       {list.isLoading ? (

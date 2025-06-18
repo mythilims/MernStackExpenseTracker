@@ -16,6 +16,8 @@ import AuthContext from "../Context/AuthContext";
 import { useContext } from "react";
 import { useParams,useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import moment from 'moment';
+import API_URL from '../../Utility/CommomUtility';
 
 function AddExpenseTracker() {
   const { id } = useParams();
@@ -24,14 +26,13 @@ function AddExpenseTracker() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitSuccessful },
     reset,
   } = useForm();
   const onSubmit = async (formata) => {
-    console.log("tedt");
     formata.userI = userDetails.id;
     try {
-      let url = id ?`http://127.0.0.1:8080/expense/update/${id}` :"http://127.0.0.1:8080/expense/create"
+      let url = id ?`${API_URL}/expense/update/${id}` :`${API_URL}/expense/create`
       let data = await fetch(url, {
         method: id? "PUT":"POST",
         headers: {
@@ -56,6 +57,9 @@ function AddExpenseTracker() {
     }
   };
   useEffect(() => {
+    if(!!id){
+
+    
     async function getById() {
       try {
         const data = await fetch(`http://127.0.0.1:8080/expense/${id}`, {
@@ -65,17 +69,20 @@ function AddExpenseTracker() {
             Authorization: `Bearer ${token}`,
           },
         });
-        const result = await data.json();
+        let result = await data.json();
         if (!data.ok) {
           toast.error(result.message);
           return;
         }
+        result.date =moment(result.date).format('YYYY-MM-DD');
         reset(result);
       } catch (e) {
         toast.error(e.message);
       }
     }
+    
     getById();
+  }
   }, [id, reset, token]);
   return (
     <Stack
@@ -200,9 +207,9 @@ function AddExpenseTracker() {
               variant="contained"
               color="success"
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitSuccessful}
             >
-              {isSubmitting ? <CircularProgress /> : id ? "Update" : "Save"}
+              {isSubmitSuccessful ? <CircularProgress /> : id ? "Update" : "Save"}
             </Button>
             <Button variant="contained" color="error" onClick={() => reset()}>
               Reset

@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 
 const ExpenseSidebar = () => {
   const location = useLocation();
+    console.log("3");
+
   const menuItems = [
     { label: "Dashboard", path: "/ExpenseDashboard" },
     { label: "Expense List", path: "/expenselist" },

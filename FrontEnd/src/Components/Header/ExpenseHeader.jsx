@@ -5,6 +5,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useContext } from "react";
 import AuthContext from '../Context/AuthContext'
 function ExpenseHeader () {
+      console.log("2");
+
     const {userDetails} =useContext(AuthContext)
     return (
         <>

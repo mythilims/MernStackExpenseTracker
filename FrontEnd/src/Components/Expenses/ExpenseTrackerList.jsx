@@ -135,7 +135,11 @@ import { Link } from "react-router-dom";
 import AuthContext from '../Context/AuthContext';
 import TableComponent from "../Table/Table";
 import { toast } from "react-toastify";
+import API_URL from '../../Utility/CommomUtility'
+
 function ExpenseTrackerList() {
+    console.log("6");
+
   const {token} =useContext(AuthContext)
   const [dataDetails, setDataDetails] = useState({
     data: [],
@@ -146,7 +150,7 @@ function ExpenseTrackerList() {
   useEffect(() => {
     async function getExpenseList() {
       try {
-        const data = await fetch("http://127.0.0.1:8080/expense/all",{
+        const data = await fetch(`${API_URL}/all?page=7&limit=100`,{
           headers:{
             'content-type':'application/json',
             'Authorization':`Bearer ${token}`
@@ -165,6 +169,7 @@ function ExpenseTrackerList() {
             "date",
             "paymentMethod",
             "notes",
+            "Action",
           ];
           result.data.forEach((item, key) => {
             item["sno"] = key + 1;
