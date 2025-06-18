@@ -101,10 +101,10 @@ function AddExpenseTracker() {
         <Stack component="form" onSubmit={handleSubmit(onSubmit)}>
           <CardHeader
             title=" Add Expense Tracker"
-            variant="h6"
+            variant="h5"
             sx={{
               backgroundColor: "#f5f5f5",
-              borderLeft: "2px solid #1976d2",
+              borderLeft: "2px solid black"              
             }}
           />
 
@@ -205,7 +205,8 @@ function AddExpenseTracker() {
           >
             <Button
               variant="contained"
-              color="success"
+              // color="success"
+              sx={{background:'black'}}
               type="submit"
               disabled={isSubmitSuccessful}
             >

@@ -18,7 +18,7 @@ const ExpenseSidebar = () => {
       anchor="left"
       sx={{
         width: 240,
-        [`& .MuiDrawer-paper`]: {  border:'2px solid #1976d2', backgroundColor: "#f5f5f5",width: 240, boxSizing: "border-box", top: "64px" }
+        [`& .MuiDrawer-paper`]: {  border:'2px solid black', backgroundColor: "#f5f5f5",width: 240, boxSizing: "border-box", top: "64px" }
       }}
     >
       <List >
@@ -31,7 +31,7 @@ const ExpenseSidebar = () => {
             selected={location.pathname === item.path}
           >
             <ListItemText primary={ <Typography variant="h1" sx={{ color: 'black', fontSize: "20px", fontWeight: 700 }}>
-      {item.label} <Divider sx={{p:1,borderLeft:'2px solid #1976d2'}}/>
+      {item.label} <Divider sx={{p:1,borderLeft:'2px solid black'}}/>
     </Typography>}   />
           </ListItem>
         ))}

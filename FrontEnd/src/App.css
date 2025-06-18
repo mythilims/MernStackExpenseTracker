@@ -4,3 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 } 
+:root {
+  --primary-bg: #f0f4ff;
+  --gradient-overlay:'linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.2))';
+  --text-color: #333333;
+  --primary-color: #1976d2;
+}
+

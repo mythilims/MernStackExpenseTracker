@@ -207,10 +207,10 @@ function ExpenseTrackerList() {
           variant="h1"
           sx={{
               backgroundColor: "#f5f5f5",
-              borderLeft: "2px solid #1976d2",
+              borderLeft: "2px solid black",
             }}
           action={
-            <Button component={Link} to="/addexpense" variant="contained">
+            <Button component={Link} to="/addexpense" variant="contained" sx={{backgroundColor:'black'}}>
               Add Expense Tracker
             </Button>
           }

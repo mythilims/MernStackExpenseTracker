@@ -31,17 +31,24 @@ function ExpenseHeader() {
   };
   return (
     <>
-      <AppBar>
+      <AppBar
+        sx={{
+          background:
+            "linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.5))",
+        }}
+      >
         <Toolbar
           sx={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            background:
+              "linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.5))",
+
+            // background: 'linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.2))'
           }}
         >
-          <Typography sx={{ borderLeft: "2px solid #1976d2" }}>
-            Expense Tracker
-          </Typography>
+          <Typography variant="h5" sx={{fontSize:'20px',fontWeight:'bold'}}>Expense Tracker</Typography>
           <Stack
             sx={{
               display: "flex",
@@ -53,8 +60,8 @@ function ExpenseHeader() {
           >
             <Avatar>{userDetails?.name?.toUpperCase().charAt(0)}</Avatar>
             <Typography>{userDetails?.name?.toUpperCase()}</Typography>
-            <IconButton onClick={handleMenuOpen}>
-              <ArrowDropDownIcon />
+            <IconButton onClick={handleMenuOpen} >
+              <ArrowDropDownIcon  sx={{backgroundColor:'white'}}/>
             </IconButton>
             <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
