@@ -78,22 +78,7 @@ function Signup() {
             backgroundPosition: "center center",
           }}
         >
-          <Stack justifyContent="center" alignItems="center" p={2}>
-            <Typography
-              variant="h6"
-              fontStyle="italic"
-              color="white"
-              fontWeight={500}
-              sx={{
-                backgroundColor: "rgba(0,0,0,0.4)",
-                padding: 2,
-                borderRadius: 2,
-                mt: 10,
-              }}
-            >
-              “Small expenses, big impact. Stay in control.”
-            </Typography>
-          </Stack>
+         
         </Grid>
         <Grid size={6}>
           <Stack

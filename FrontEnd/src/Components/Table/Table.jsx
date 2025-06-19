@@ -119,11 +119,11 @@ function TableComponent({ list }) {
                           borderRadius: "8px",
                           padding: "4px",
                           color:'white',
-                          background:" #1976d2",
+                          background:" black",
                           cursor:'pointer',
                           '&:hover':{
                             color:'white',
-                          background:" #1976d2",
+                          background:"black",
                             cursor:'pointer',
 
                           }
