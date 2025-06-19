@@ -47,9 +47,9 @@ function AddExpenseTracker() {
         return;
       }
       toast.success(id ? `Expense Updated success`:`Expense Created success`);
-      if(id){
+      // if(id){
         navigate('/expenselist')
-      }
+      // }
     } catch (e) {
       toast.error(e.message);
     } finally {
@@ -210,7 +210,7 @@ function AddExpenseTracker() {
               type="submit"
               disabled={isSubmitSuccessful}
             >
-              {isSubmitSuccessful ? <CircularProgress /> : id ? "Update" : "Save"}
+              {isSubmitSuccessful ? <CircularProgress   /> : id ? "Update" : "Save"}
             </Button>
             <Button variant="contained" color="error" onClick={() => reset()}>
               Reset

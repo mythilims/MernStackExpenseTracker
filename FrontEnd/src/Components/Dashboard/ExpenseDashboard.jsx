@@ -4,6 +4,8 @@ import {
   CardHeader,
   CardContent,
   Stack,
+  Grid,
+  Paper
 } from "@mui/material";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { useEffect, useState } from "react";
@@ -39,14 +41,13 @@ function ExpenseDashboard() {
   ];
 
   return (
-    <Stack sx={{ p: 6 }} gap={2} >
-      <Typography variant="h5" fontWeight="bold">
-        Dashboard
-      </Typography>
+    <>
+   <Grid container spacing={5} py={10}>
+    {chartTitles.map((title, index) => (
+        <Grid item xs={12} sm={6} md={4} key={index} >
 
-      {chartTitles.map((title, index) => (
         <Card key={index}>
-          <CardHeader title={title} />
+          <CardHeader title={title}  />
           <CardContent>
             <PieChart
               series={[
@@ -56,13 +57,18 @@ function ExpenseDashboard() {
                   outerRadius: 80,
                 },
               ]}
-              width={400}
-              height={250}
+              width={200}
+              height={200}
             />
           </CardContent>
         </Card>
+          </Grid>
+
       ))}
-    </Stack>
+  
+</Grid>
+    
+     </>
   );
 }
 
