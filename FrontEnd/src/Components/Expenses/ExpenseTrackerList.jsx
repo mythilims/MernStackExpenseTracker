@@ -140,7 +140,7 @@ import API_URL from '../../Utility/CommomUtility'
 function ExpenseTrackerList() {
     console.log("6");
 
-  const {token} =useContext(AuthContext)
+  const {token,userDetails} =useContext(AuthContext)
   const [dataDetails, setDataDetails] = useState({
     data: [],
     column: [],

@@ -30,7 +30,7 @@ function AddExpenseTracker() {
     reset,
   } = useForm();
   const onSubmit = async (formata) => {
-    formata.userI = userDetails.id;
+    formata.userId = userDetails.id;
     try {
       let url = id ?`${API_URL}/expense/update/${id}` :`${API_URL}/expense/create`
       let data = await fetch(url, {

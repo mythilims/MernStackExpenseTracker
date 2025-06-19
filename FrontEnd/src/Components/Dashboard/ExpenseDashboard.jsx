@@ -11,34 +11,42 @@ import API_URL from "../../Utility/CommomUtility";
 
 function ExpenseDashboard() {
   const [chartData, setChartData] = useState([]);
+
   useEffect(() => {
-    async function chartData() {
+    async function fetchChartData() {
       try {
-        let data = await fetch(`${API_URL}/expense/byCateogry`, {
-          method: "get",
+        const res = await fetch(`${API_URL}/expense/byCateogry`, {
+          method: "GET",
           headers: {
-            "content-type": "application/json",
+            "Content-Type": "application/json",
           },
         });
-        const result = await data.json();
+        const result = await res.json();
         console.log(result);
         setChartData(result);
       } catch (e) {
-        console.log(e);
+        console.error("Failed to fetch chart data", e);
       }
     }
-    chartData();
+
+    fetchChartData();
   }, []);
+
+  const chartTitles = [
+    "Expense By Category",
+    "This Month's Spending",
+    "Category-wise Breakdown",
+  ];
+
   return (
-    <>
-      <Stack spacing={2} sx={{ p: 6 }}>
-        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-          Dashboard
-        </Typography>
-      </Stack>
-      <Stack spacing={2}>
-        <Card>
-          <CardHeader variant="h1" title="Expense By Category"></CardHeader>
+    <Stack sx={{ p: 6 }} gap={2} >
+      <Typography variant="h5" fontWeight="bold">
+        Dashboard
+      </Typography>
+
+      {chartTitles.map((title, index) => (
+        <Card key={index}>
+          <CardHeader title={title} />
           <CardContent>
             <PieChart
               series={[
@@ -50,11 +58,11 @@ function ExpenseDashboard() {
               ]}
               width={400}
               height={250}
-            ></PieChart>
+            />
           </CardContent>
         </Card>
-      </Stack>
-    </>
+      ))}
+    </Stack>
   );
 }
 

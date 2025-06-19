@@ -29,11 +29,18 @@ function Signup() {
         body: JSON.stringify(details),
       });
       const result = await data.json();
-      if (!result.ok) {
+      if (!data.ok) {
         toast.error(result.message);
         return;
       }
-      toast("Signup successfuly");
+
+      let detail = JSON.stringify({
+        name: result.userDetails.username,
+        email: result.userDetails.email,
+        id: result.userDetails._id,
+      });
+      toast.success(result.message);
+    //   login(result.token, detail,'SignUp');
       navigate("/");
     } catch (e) {
       toast.error(e.message);

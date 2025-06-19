@@ -19,7 +19,7 @@ const getAllExpenseTracker = async (req, res) => {
    console.log(skip);
    let total =await ExpenseTracker.countDocuments();
   try {
-    const expense = await ExpenseTracker.find().skip(skip).limit(limit).select('name amount category date notes paymentMethod id');
+    const expense = await ExpenseTracker.find().skip(skip).limit(limit).select('name amount category date notes paymentMethod userId ');
     res.status(200).json({data:expense,currentPage:page,totalPages:Math.ceil(total/limit),totalItems:total});
   } catch (e) {
     res.status(500).json({ message: e.message });
