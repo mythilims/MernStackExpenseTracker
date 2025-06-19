@@ -40,7 +40,7 @@ function Signup() {
         id: result.userDetails._id,
       });
       toast.success(result.message);
-    //   login(result.token, detail,'SignUp');
+      //   login(result.token, detail,'SignUp');
       navigate("/");
     } catch (e) {
       toast.error(e.message);
@@ -77,9 +77,7 @@ function Signup() {
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
           }}
-        >
-         
-        </Grid>
+        ></Grid>
         <Grid size={6}>
           <Stack
             display={"flex"}
@@ -92,28 +90,41 @@ function Signup() {
               component={"form"}
               onSubmit={handleSubmit(onSubmit)}
               spacing={2}
-             
-               sx={{
+              sx={{
                 height: "100%",
                 width: "100%",
                 alignItems: "center",
                 justifyContent: "center",
                 backgroundColor: "white",
-                boxShadow: "0 0 4px 1px rgba(0,0,0,0.2)",
+                // boxShadow: "0 0 4px 1px rgba(0,0,0,0.2)",
+                boxShadow: "0 0 0 5px 1px rgba(0,0,0,0.2)",
+                backgroundColor: "#f2e2e5",
                 p: 3,
                 borderRadius: 0,
               }}
             >
-              <Typography variant="h6" >
-                Welcome to Sign up
-              </Typography>
+              <Typography variant="h6"  sx={{fontWeight:'bold' ,fontSize:'23px'}}>Welcome to Sign up</Typography>
               <TextField
                 {...register("username", { required: "Username is required" })}
                 helperText={errors.username?.message}
                 error={!!errors.username}
                 type="text"
                 size="small"
-                 sx={{ width: "50%" }}
+                sx={{
+                  width: "50%",
+                   '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'gray', // default
+      },
+      '&:hover fieldset': {
+        borderColor: 'black', // on hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'gray', // on focus ✅
+        // borderWidth: '2px',
+      },
+    },
+                }}
                 // fullWidth
                 label="Username"
               />
@@ -124,7 +135,7 @@ function Signup() {
                 type="text"
                 size="small"
                 // fullWidth
-                 sx={{ width: "50%" }}
+                sx={{ width: "50%" }}
                 label="Email"
               />
               <TextField
@@ -140,14 +151,12 @@ function Signup() {
               <Button
                 variant="contained"
                 type="submit"
-               sx={{ width: "50%",backgroundColor:'black' }}
+                sx={{ width: "50%", backgroundColor: "black" }}
                 disabled={isSubmitSuccessful}
               >
                 Signup
               </Button>
-              <Stack
-               display={"flex"} direction={"row"} spacing={12}
-              >
+              <Stack display={"flex"} direction={"row"} spacing={12}>
                 <Typography variant="body2" component={"h1"}>
                   Have an account{" "}
                 </Typography>

@@ -103,14 +103,16 @@ function Login() {
                 alignItems: "center",
                 justifyContent: "center",
                 backgroundColor: "white",
-                boxShadow: "0 0 4px 1px rgba(0,0,0,0.2)",
+                // boxShadow: "0 0 4px 1px rgba(0,0,0,0.2)",
+                boxShadow: "0 0 0 0px 1px rgba(0,0,0,0.2)",
+                backgroundColor:'#f2e2e5',
                 p: 3,
                 borderRadius: 0,
               }}
               component="form"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <Typography variant="h5">Welcome</Typography>
+              <Typography variant="h5" sx={{fontWeight:'bold' ,fontSize:'25px'}}>Welcome</Typography>
               <TextField
                 label="Email"
                 size="small"
